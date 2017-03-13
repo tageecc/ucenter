@@ -14,10 +14,11 @@ onerror(app);
 app.use(logger());
 
 app.use(hbs.middleware({
-    viewPath: __dirname + '/views'
+    viewPath: __dirname + '/views',
+    disableCache:true
 }));
 
-// app.use(statics(__dirname + '/public'));
+app.use(statics(__dirname + '/public'));
 
 app.use(index.routes());
 app.use(index.allowedMethods());

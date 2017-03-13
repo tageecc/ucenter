@@ -1,1 +1,41 @@
-Hello, {{title}}!
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    <style>
+        body{
+            margin:0;
+            background-color: #373b3f;
+        }
+        .warp{
+            width: 400px;
+            height: 80px;
+            margin:30% auto 0;
+            border:1px solid red;
+        }
+        hr{
+            width:300px;
+            border-color: #373b3f;
+        }
+
+        .ipt{
+            background-color: transparent;
+            border:none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div class="warp">
+    <form action="">
+        <input class="ipt" type="text" placeholder="username" name="username" autocomplete="off" required>
+        <hr>
+        <input class="ipt" type="password" placeholder="password" name="password" autocomplete="off" required>
+    </form>
+</div>
+</body>
+</html>
