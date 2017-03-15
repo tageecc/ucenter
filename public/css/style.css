@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    background-color: #35393d;
+}
+
+.warp {
+    width: 300px;
+    padding: 10px 20px;
+    margin: 500px auto 0;
+    border-radius: 10px;
+    background-color: #1c1e21;
+    position: relative;
+    zoom: 1;
+}
+.pre-hide{
+    opacity: 0;
+    transition: 0.25s all;
+}
+.pre-hide:hover{
+    opacity: 1;
+}
+.h-img {
+    border-radius: 50%;
+    position: absolute;
+    top: -160px;
+    left: 130px;
+    border: 2px solid #545a63;
+    user-select: none;
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+}
+
+hr {
+    width: 300px;
+    margin: 5px 0;
+    height: 2px;
+    border-width: 0;
+    background-color: #35393d
+}
+
+.ipt {
+    background-color: transparent;
+    border: none;
+    color: #aeb8cf;
+    font: 700 14px/30px "Microsoft YaHei";
+    outline: none;
+    user-select: none;
+    width: 100%;
+}
+
+.ipt::-webkit-input-placeholder {
+    color: #505661;
+}
+
+.submit {
+    border-radius: 50%;
+    background-color: #1c1e21;
+    border: 6px solid #35393d;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 17px;
+    right: -27px;
+    cursor: pointer;
+}
+
+.submit:before {
+    content: '';
+    border: 8px solid;
+    border-color: transparent transparent transparent #6cc3fe;
+    position: absolute;
+    top: 17px;
+    left: 22px;
+    animation: breathe 2700ms ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+    0% {
+        opacity: .2;
+        border-color: transparent transparent transparent #6cc3fe;
+    }
+    100% {
+        opacity: 1;
+        border-color: transparent transparent transparent #21a1d0;
+    }
+}
+
+#cas {
+    position: absolute;
+    top: 0;
+}
+
+.forget {
+    position: absolute;
+    bottom: -20px;
+    left: 5px;
+    font-size: 12px;
+    color: #999;
+}

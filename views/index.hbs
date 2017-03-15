@@ -6,98 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ title }}</title>
-    <style>
-        body {
-            margin: 0;
-            background-color: #35393d;
-        }
-
-        .warp {
-            width: 300px;
-            padding: 10px 20px;
-            margin: 30% auto 0;
-            border-radius: 10px;
-            background-color: #1c1e21;
-            position: relative;
-            zoom: 1;
-        }
-
-        .h-img {
-            border-radius: 50%;
-            position: absolute;
-            top: -160px;
-            left: 130px;
-            border: 2px solid #1c1e21;
-        }
-
-        hr {
-            width: 300px;
-            margin: 5px 0;
-            height: 2px;
-            border-width: 0;
-            background-color: #35393d
-        }
-
-        .ipt {
-            background-color: transparent;
-            border: none;
-            color: #aeb8cf;
-            font: 700 14px/30px "Microsoft YaHei";
-            outline: none;
-        }
-
-        .ipt::-webkit-input-placeholder {
-            color: #505661;
-        }
-
-        .submit {
-            border-radius: 50%;
-            background-color: #1c1e21;
-            border: 6px solid #35393d;
-            width: 50px;
-            height: 50px;
-            position: absolute;
-            top: 17px;
-            right: -27px;
-            cursor: pointer;
-        }
-
-        .submit:before {
-            content: '';
-            border: 8px solid;
-            border-color: transparent transparent transparent #6cc3fe;
-            position: absolute;
-            top: 17px;
-            left: 22px;
-            animation: breathe 2700ms ease-in-out infinite alternate;
-        }
-
-        @keyframes breathe {
-            0% {
-                opacity: .2;
-                border-color: transparent transparent transparent #6cc3fe;
-            }
-            100% {
-                opacity: 1;
-                border-color: transparent transparent transparent #21a1d0;
-            }
-        }
-        #cas{
-            position: absolute;
-            top:0;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <canvas id="cas"></canvas>
 <div class="warp">
-    <img class="h-img" src="//temp.im/100x100" alt="">
+    <img class="h-img pre-hide" src="/images/default.gif" alt="">
     <form action="">
-        <input class="ipt" type="text" placeholder="username" name="username" autocomplete="off" required>
+        <input class="ipt" type="text" placeholder="用户名" name="username" autocomplete="off" required>
         <hr>
-        <input class="ipt" type="password" placeholder="password" name="password" autocomplete="off" required>
+        <input class="ipt" type="password" placeholder="密码" name="password" autocomplete="off" required>
         <a type="submit" class="submit"></a>
     </form>
+    <a href="/forget" class="forget pre-hide">忘记密码？</a>
 </div>
 <script type="text/javascript" src="/js/canvas-particle.js"></script>
 </body>
