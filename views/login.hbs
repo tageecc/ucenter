@@ -13,10 +13,11 @@
 <div class="warp">
     <div class="box-login">
         <img class="h-img pre-hide" id="j_img" src="/images/default.gif" alt="">
-        <form onsubmit="return false;">
+        <form action="/user/login" method="post">
             <input class="ipt" type="text" placeholder="用户名" name="username" autocomplete="off" required>
             <hr>
             <input class="ipt" type="password" placeholder="密码" name="password" autocomplete="off" required>
+            <input type="hidden" name="redirect_uri" value="{{redirect_uri}}">
             <button class="submit"></button>
         </form>
         <a href="/forget" class="forget pre-hide">忘记密码？</a>
@@ -32,7 +33,7 @@
                 $('#j_img').removeClass('pre-hide').attr('src', res.avatar);
             }
         })
-    })
+    });
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const sequelize = require('../dbConnection/db');
+const sequelize = require('../util/db');
 
 let User = sequelize.define('user', {
     uid: {

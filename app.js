@@ -5,10 +5,16 @@ const bodyParser = require('koa-bodyparser');
 const onerror = require('koa-onerror');
 const logger = require('koa-logger');
 const statics = require('koa-static');
+const session = require("koa-session2");
 const hbs = require('koa-hbs');
 
+const Store = require("./util/store");
 const user = require('./routes/user');
 const admin = require('./routes/admin');
+
+app.use(session({
+    store: new Store()
+}));
 
 onerror(app);
 app.use(logger());
