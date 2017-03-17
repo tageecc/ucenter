@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 
 router.get('/', async (ctx, next) => {
-    await ctx.render('index', {title: '用户登陆'});
+    await ctx.render('index', {title: '用户登陆',layout: false});
 });
 
 /**
