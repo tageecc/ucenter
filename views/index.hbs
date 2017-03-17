@@ -11,15 +11,28 @@
 <body>
 <canvas id="cas"></canvas>
 <div class="warp">
-    <img class="h-img pre-hide" src="/images/default.gif" alt="">
-    <form action="">
-        <input class="ipt" type="text" placeholder="用户名" name="username" autocomplete="off" required>
-        <hr>
-        <input class="ipt" type="password" placeholder="密码" name="password" autocomplete="off" required>
-        <a type="submit" class="submit"></a>
-    </form>
-    <a href="/forget" class="forget pre-hide">忘记密码？</a>
+    <div class="box-login">
+        <img class="h-img pre-hide" id="j_img" src="/images/default.gif" alt="">
+        <form onsubmit="return false;">
+            <input class="ipt" type="text" placeholder="用户名" name="username" autocomplete="off" required>
+            <hr>
+            <input class="ipt" type="password" placeholder="密码" name="password" autocomplete="off" required>
+            <button class="submit"></button>
+        </form>
+        <a href="/forget" class="forget pre-hide">忘记密码？</a>
+    </div>
 </div>
+<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/js/canvas-particle.js"></script>
+<script>
+    $('input[name="username"]').blur(function () {
+        $.getJSON('/user/avator', {user: $(this).val()}, function (res) {
+            console.log(res);
+            if (+res.code === 100) {
+                $('#j_img').removeClass('pre-hide').attr('src', res.avatar);
+            }
+        })
+    })
+</script>
 </body>
 </html>

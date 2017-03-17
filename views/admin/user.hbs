@@ -1,0 +1,116 @@
+<h3 class="tit">用户管理</h3>
+<div class="clearfix">
+    <div class="search">
+        <i class="fa fa-search"></i>
+        <input type="text" placeholder="搜索" autocomplete="off">
+    </div>
+    <div class="opt-btn">
+        <a href="javascript:void(0);" class="btn-add"><i class="fa fa-user-plus"></i>添加</a>
+        <a href="javascript:void(0);" class="btn-editor"><i class="fa fa-edit"></i>编辑</a>
+        <a href="javascript:void(0);" class="btn-delete"><i class="fa fa-trash"></i>删除</a>
+    </div>
+</div>
+<div class="user-list">
+    <table class="tb-users" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th width="30"></th>
+            <th>用户名</th>
+            <th>昵称</th>
+            <th>电话</th>
+            <th>住址</th>
+            <th>上次登录</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#if users.length}}
+            {{#each users}}
+                <tr>
+                    <td>
+                        <input data-uid="{{uid}}" type="checkbox" id="checkbox_{{@index}}">
+                        <label for="checkbox_{{@index}}"></label>
+                    </td>
+                    <td>{{username}}</td>
+                    <td>{{nick}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{address}}</td>
+                    <td>{{last_login}}</td>
+                </tr>
+            {{/each}}
+        {{/if}}
+        </tbody>
+    </table>
+</div>
+
+<script id="tpl_add_user" type="text/html">
+    <div class="content">
+        <p class="tit">添加用户</p>
+        <form action="" onsubmit="return false;">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="username" autocomplete="off" required>
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="password" autocomplete="off" required>
+            <label for="nick">昵称：</label>
+            <input type="text" id="nick" name="nick" autocomplete="off" required>
+            <label for="address">住址：</label>
+            <input type="text" id="address" name="address" autocomplete="off" required>
+            <label for="phone">电话：</label>
+            <input type="number" id="phone" name="phone" autocomplete="off" required>
+            <button id="j_add_user" class="submit">添加</button>
+        </form>
+    </div>
+</script>
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="//cdn.bootcss.com/layer/3.0.1/layer.min.js"></script>
+<script>
+    /*添加用户*/
+    $('.btn-add').on('click', function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 1,
+            skin: 'g-add-user',
+            content: $('#tpl_add_user').html()
+        });
+    });
+    $(document).on('click', '#j_add_user', function () {
+        var data = {
+            username: $('#username').val(),
+            password: $('#password').val(),
+            nick: $('#nick').val(),
+            address: $('#address').val(),
+            phone: $('#phone').val(),
+        };
+        $.post('/admin/user/add', data, function (res) {
+            if (res.code === 100) {
+                layer.msg(res.message);
+                setTimeout(function () {
+                    layer.closeAll('page');
+                }, 500);
+            } else {
+                layer.msg(res.message, function () {
+                });
+            }
+        })
+    });
+
+    /*删除用户*/
+    $('.btn-delete').on('click', function () {
+        var users = $('.user-list input:checked');
+        if (users.length == 0) {
+            layer.msg('请先选择要删除的用户！', function () {
+            });
+            return false;
+        }
+        var uid = [];
+        users.map(function (i, v) {
+            uid.push($(v).data('uid'));
+        });
+        $.post('/admin/user/delete', {uid:uid}, function (res) {
+            console.log(res);
+        });
+    });
+</script>
+</body>
+</html>

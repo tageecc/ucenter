@@ -1,6 +1,29 @@
+body, html {
+    height: 100%;
+}
+
+/*login.html*/
 body {
     margin: 0;
     background-color: #35393d;
+}
+
+ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+input, button {
+    outline: none;
+}
+
+.clearfix {
+    overflow: auto;
 }
 
 .warp {
@@ -12,14 +35,17 @@ body {
     position: relative;
     zoom: 1;
 }
-.pre-hide{
+
+.pre-hide {
     opacity: 0;
     transition: 0.25s all;
 }
-.pre-hide:hover{
+
+.pre-hide:hover {
     opacity: 1;
 }
-.h-img {
+
+.box-login .h-img {
     border-radius: 50%;
     position: absolute;
     top: -160px;
@@ -31,7 +57,7 @@ body {
     height: 100px;
 }
 
-hr {
+.box-login hr {
     width: 300px;
     margin: 5px 0;
     height: 2px;
@@ -39,7 +65,7 @@ hr {
     background-color: #35393d
 }
 
-.ipt {
+.box-login .ipt {
     background-color: transparent;
     border: none;
     color: #aeb8cf;
@@ -49,23 +75,25 @@ hr {
     width: 100%;
 }
 
-.ipt::-webkit-input-placeholder {
+.box-login .ipt::-webkit-input-placeholder {
     color: #505661;
 }
 
-.submit {
+.box-login .submit {
+    display: block;
     border-radius: 50%;
     background-color: #1c1e21;
     border: 6px solid #35393d;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     position: absolute;
-    top: 17px;
+    top: 16px;
     right: -27px;
+    outline: none;
     cursor: pointer;
 }
 
-.submit:before {
+.box-login .submit:before {
     content: '';
     border: 8px solid;
     border-color: transparent transparent transparent #6cc3fe;
@@ -86,15 +114,238 @@ hr {
     }
 }
 
+.box-login .forget {
+    position: absolute;
+    bottom: -20px;
+    font-size: 12px;
+    color: #999;
+}
+
 #cas {
     position: absolute;
     top: 0;
 }
 
-.forget {
+/*admin.html*/
+header, footer {
+    height: 65px;
+    background-color: #2e3137;
+}
+
+header .logo {
+    color: #555;
+    font: 20px/65px "Microsoft YaHei";
+    margin-left: 20px;
+}
+
+header .avatar {
+    border-radius: 50%;
+    float: right;
+    margin: 12px 20px 0 0;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+}
+
+nav {
+    float: left;
+    width: 120px;
+    height: 100%;
+    padding-top: 50px;
+    box-sizing: border-box;
+    border-right: 1px solid #ccc;
+    background-color: #f5f5f7;
+}
+
+.nav-list li {
+    color: #2e3137;
+    text-align: center;
+    transition: 0.12s all;
+    padding: 10px 0;
+}
+
+.nav-list li a {
+    color: #2e3137;
+    font: 400 18px/30px "Microsoft YaHei";
+    display: block;
+}
+
+.nav-list li span {
+    display: block;
+}
+
+.nav-list li.cur, .nav-list li:hover {
+    background-color: #e6e7eb;
+    color: #333;
+    border-left: 5px solid #f44351;
+}
+
+.nav-list li.cur a, .nav-list li:hover a {
+    color: #333;
+}
+
+.main {
+    overflow: auto;
+    height: 100%;
+    background-color: #fafafa;
+    padding-left: 20px;
+}
+
+.main .tit {
+    color: #555;
+    font: 400 20px/30px "Microsoft YaHei";
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.main .search {
+    position: relative;
+    float: left;
+}
+
+.main .search i {
     position: absolute;
-    bottom: -20px;
-    left: 5px;
+    top: 6px;
+    left: 275px;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.main .search input {
+    display: block;
+    box-sizing: border-box;
+    border-radius: 30px;
+    height: 30px;
+    width: 300px;
+    border: 1px solid #ccc;
+    outline: none;
+    padding: 6px 30px 6px 15px;
+}
+
+.main .opt-btn {
+    overflow: hidden;
+    height: 40px;
+    margin-left: 30px;
+}
+
+.main .opt-btn {
+    float: left;
+}
+
+.main .opt-btn a {
+    float: left;
+    margin-right: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 4px 20px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.main .opt-btn a:hover {
+    opacity: 0.8;
+}
+
+.main .opt-btn .btn-add {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.main .opt-btn .btn-editor {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+.main .opt-btn .btn-delete {
+    background-color: #f44351;
+    border-color: #e33e4b;
+}
+
+.user-list {
+    margin-top: 20px;
+    border-top: 2px solid #f44351;
+}
+
+.user-list .tb-users {
+    width: 100%;
+}
+
+.tb-users thead {
+    background-color: #eff0f2;
+}
+
+.tb-users th, .tb-users td {
+    color: #555;
+    height: 40px;
+    font-weight: 400;
+    text-align: left;
+    text-indent: 20px;
+}
+
+.tb-users tbody tr:hover, .tb-users tr:nth-child(2n) {
+    background-color: #eff0f2;
+}
+
+.tb-users input[type='checkbox'] {
+    display: none;
+}
+
+.tb-users input[type='checkbox'] + label {
+    background-color: #FFF;
+    border: 1px solid #C1CACA;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 5px;
+    display: inline-block;
+    position: relative;
+    margin-right: 30px;
+    user-select: none;
+}
+
+.tb-users input[type='checkbox']:checked + label:after {
+    content: '\2714';
+    position: absolute;
+    top: -3px;
+    left: -18px;
+    color: #f44351;
+    font-size: 18px;
+}
+
+.g-add-user .content {
+    padding: 20px;
+}
+
+.g-add-user .tit {
+    margin: 0 0 20px 0;
+    font: 14px/30px "Microsoft YaHei";
+    border-bottom: 1px solid #ccc;
+}
+
+.g-add-user label {
+    display: block;
     font-size: 12px;
-    color: #999;
+    color: #555;
+}
+
+.g-add-user input {
+    border: 1px solid #ccc;
+    width: 300px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.g-add-user .submit {
+    display: block;
+    border-radius: 5px;
+    margin: 10px auto;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    color: #fefefe;
+    background-color: #f44351;
+    border: 1px solid #ccc;
+    cursor: pointer;
 }
