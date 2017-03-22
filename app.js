@@ -6,20 +6,17 @@ const onerror = require('koa-onerror');
 const logger = require('koa-logger');
 const statics = require('koa-static');
 const session = require('koa-session-minimal');
-const redisStore = require('koa-redis');
-const redis = require('redis');
+const koaRedis = require('koa-redis');
 const hbs = require('koa-hbs');
 
 const route = require('./routes');
-const redisConfig = require('./config/redisconfig');
+const redisStore = require('./middlewares/redisStore');
 
 //session
-let client = redis.createClient(redisConfig.port, redisConfig.host);
-app.keys = ['keys', redisConfig.key];
+app.keys = ['keys', 'tagee_ucenter'];
 app.use(session({
-    store: redisStore({
-        // db:config.redis_db,
-        client: client
+    store: koaRedis({
+        client: redisStore.redisClient
     })
 }));
 
