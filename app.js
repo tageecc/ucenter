@@ -13,7 +13,7 @@ const hbs = require('koa-hbs');
 const route = require('./routes');
 const redisConfig = require('./config/redisconfig');
 
-//session中间件
+//session
 let client = redis.createClient(redisConfig.port, redisConfig.host);
 app.keys = ['keys', redisConfig.key];
 app.use(session({
@@ -23,7 +23,7 @@ app.use(session({
     })
 }));
 
-onerror(app);
+// 中间件
 app.use(logger());
 app.use(bodyParser());
 
@@ -40,5 +40,9 @@ app.use(statics(__dirname + '/public'));
 // 路由配置
 app.use(route.routes());
 app.use(route.allowedMethods());
+
+// 错误信息
+onerror(app);
+
 
 module.exports = app;
