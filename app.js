@@ -5,11 +5,23 @@ const bodyParser = require('koa-bodyparser');
 const onerror = require('koa-onerror');
 const logger = require('koa-logger');
 const statics = require('koa-static');
-const Redis = require('ioredis');
+const session = require('koa-session-minimal');
+const redisStore = require('koa-redis');
+const redis = require('redis');
 const hbs = require('koa-hbs');
 
 const route = require('./routes');
+const redisConfig = require('./config/redisconfig');
 
+//session中间件
+let client = redis.createClient(redisConfig.port, redisConfig.host);
+app.keys = ['keys', redisConfig.key];
+app.use(session({
+    store: redisStore({
+        // db:config.redis_db,
+        client: client
+    })
+}));
 
 onerror(app);
 app.use(logger());

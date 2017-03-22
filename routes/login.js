@@ -13,7 +13,6 @@ router.get('/', async (ctx, next) => {
     let token = ctx.cookies.get('token');
     if (token) {
         //存在token，则在内存中寻找之前与用户的映射关系
-        //异步的
         if (ctx.session.userlist && ctx.session.userlist[token]) {
             ctx.redirect('http://' + redirect_uri + '?token=' + token);
             return false;
@@ -31,8 +30,7 @@ router.get('/', async (ctx, next) => {
 router.post('/handle', async (ctx, next) => {
 
     const redirect_uri = ctx.request.body.redirect_uri;
-    console.log('redirect_uri:' + redirect_uri);
-    const token = new Date().getTime() + '_';
+    const token = Math.random().toString(36).substr(2);
 
     let user = await User.findOne({
         attributes: {exclude: ['password']},
@@ -45,17 +43,17 @@ router.post('/handle', async (ctx, next) => {
         }
     });
     if (user) {
+        //登陆成功
         ctx.cookies.set('token', token);
         ctx.session.userlist = ctx.session.userlist || {};
         ctx.session.userlist[token] = user;
-        console.log(ctx.session.userlist[token], token);
         if (redirect_uri) {
             ctx.redirect(redirect_uri + '?token=' + token);
         } else {
-            ctx.redirect('/admin/user');
+            ctx.redirect('/admin');
         }
     } else {
-
+        //用户名或密码错误
     }
 
 });
@@ -65,10 +63,7 @@ router.post('/handle', async (ctx, next) => {
  */
 router.post('/validate', async (ctx, next) => {
     const token = ctx.request.body.token;
-    console.log("token:" + token);
-    console.log(ctx.session);
     let user = ctx.session.userlist ? ctx.session.userlist[token] : null;
-    console.log(ctx.session.userlist, user);
     if (user) {
         ctx.body = {code: 1, data: {user: user}}
     } else {
