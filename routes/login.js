@@ -5,11 +5,9 @@ const User = require('../models/user');
 router.get('/', async (ctx, next) => {
     let redirect_uri = ctx.query.redirect_uri;
     let token = ctx.cookies.get('token');
-    console.log("login_redirect_uri:" + redirect_uri);
     //存在token，则在内存中寻找之前与用户的映射关系
-    if (token && ctx.session.userlist && ctx.session.userlist[token]) {
-        console.log("login_user");
-        console.log(ctx.session.userlist[token]);
+    let user = await ctx.redis.get(token);
+    if (token && user) {
         if (!redirect_uri) {
             ctx.redirect('/admin');
             return;
@@ -42,8 +40,7 @@ router.post('/handle', async (ctx, next) => {
     if (user) {
         //登陆成功
         ctx.cookies.set('token', token);
-        ctx.session.userlist = ctx.session.userlist || {};
-        ctx.session.userlist[token] = user;
+        await ctx.redis.set(token, user.get({plain: true}));
         if (redirect_uri) {
             ctx.redirect(redirect_uri + '?token=' + token);
         } else {
@@ -60,10 +57,7 @@ router.post('/handle', async (ctx, next) => {
  */
 router.post('/validate', async (ctx, next) => {
     const token = ctx.request.body.token;
-    console.log("login_validate_token:" + token);
-    let user = ctx.session.userlist ? ctx.session.userlist[token] : null;
-    console.log("login_validate_user:");
-    console.log(ctx.session.userlist[token]);
+    let user = await ctx.redis.get(token);
     if (user) {
         ctx.body = {code: 1, data: {user: user}}
     } else {
@@ -76,7 +70,7 @@ router.post('/validate', async (ctx, next) => {
  */
 router.get('/bye', async (ctx, next) => {
     const token = ctx.cookies.get('token');
-    ctx.session.userlist && (ctx.session.userlist[token] = null);
-    await ctx.redirect('/');
+    await ctx.redis.set(token, null);
+    ctx.redirect('/');
 });
 module.exports = router;

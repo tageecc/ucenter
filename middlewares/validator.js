@@ -1,8 +1,7 @@
 module.exports = {
     adminRequired: async (ctx, next) => {
-
         let token = ctx.cookies.get('token');
-        if (token && ctx.session.userlist && ctx.session.userlist[token]) {
+        if (token && await ctx.redis.get(token)) {
             await next();
         } else {
             ctx.redirect('/login');

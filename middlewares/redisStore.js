@@ -1,9 +1,22 @@
-const session = require('koa-session-minimal');
-const redisStore = require('koa-redis');
-const redis = require('redis');
-
+const redis = require('promise-redis')();
 const redisConfig = require('../config/redisconfig');
 
-let client = redis.createClient(redisConfig.port, redisConfig.host);
+class RedisStore {
+    constructor() {
+        this.redis = redis.createClient(redisConfig.port, redisConfig.host, {auth_pass: redisConfig.password});
+    }
 
-exports.redisClient = client;
+    async set(key, value) {
+        await this.redis.set(key, JSON.stringify(value));
+    }
+
+    async get(key) {
+        let data = await this.redis.get(key);
+        return JSON.parse(data);
+    }
+}
+
+module.exports = async (ctx, next) => {
+    ctx.redis = new RedisStore();
+    await next();
+};

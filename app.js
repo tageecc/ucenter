@@ -5,20 +5,14 @@ const bodyParser = require('koa-bodyparser');
 const onerror = require('koa-onerror');
 const logger = require('koa-logger');
 const statics = require('koa-static');
-const session = require('koa-session-minimal');
-const koaRedis = require('koa-redis');
 const hbs = require('koa-hbs');
+const Redis = require('ioredis');
 
 const route = require('./routes');
 const redisStore = require('./middlewares/redisStore');
 
-//session
-app.keys = ['keys', 'tagee_ucenter'];
-app.use(session({
-    store: koaRedis({
-        client: redisStore.redisClient
-    })
-}));
+//redisStore
+app.use(redisStore);
 
 // 中间件
 app.use(logger());
