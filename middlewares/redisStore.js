@@ -3,7 +3,7 @@ const redisConfig = require('../config/redisconfig');
 
 class RedisStore {
     constructor() {
-        this.redis = redis.createClient(redisConfig.port, redisConfig.host, {auth_pass: redisConfig.password});
+        this.redis = redis.createClient(redisConfig.port, redisConfig.host, /*{auth_pass: redisConfig.password}*/);
     }
 
     async set(key, value) {
