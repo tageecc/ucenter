@@ -26,6 +26,6 @@
     "mysql": "^2.13.0",
     "promise-redis": "0.0.5",
     "redis": "^2.7.1",
-    "sequelize": "^3.30.2"
+    "sequelize": "^5.3.0"
   }
 }
