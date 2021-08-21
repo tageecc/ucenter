@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ioredis": "^2.5.0",
+    "ioredis": "^4.27.8",
     "koa": "^2.0.0-alpha.8",
     "koa-bodyparser": "^4.1.0",
     "koa-convert": "^1.2.0",
